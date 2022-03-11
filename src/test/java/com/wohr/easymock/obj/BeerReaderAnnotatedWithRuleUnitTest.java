@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 import static org.easymock.EasyMock.*;
 
-public class BaeldungReaderAnnotatedWithRuleUnitTest {
+public class BeerReaderAnnotatedWithRuleUnitTest {
 
 	@Rule
 	public EasyMockRule mockRule = new EasyMockRule(this);
@@ -21,7 +21,7 @@ public class BaeldungReaderAnnotatedWithRuleUnitTest {
 	IArticleWriter mockArticleWriter;
 
 	@TestSubject
-	BaeldungReader baeldungReader = new BaeldungReader();
+    BeerReader baeldungReader = new BeerReader();
 
     @Test
     public void givenBaeldungReader_whenReadNext_thenNextArticleRead() {
@@ -34,8 +34,10 @@ public class BaeldungReaderAnnotatedWithRuleUnitTest {
     @Test
     public void givenBaeldungReader_whenWrite_thenWriterCalled() {
         expect(mockArticleWriter.write("title", "content")).andReturn(null);
+        expect(mockArticleWriter.write("title", "content")).andReturn("teste");
         replay(mockArticleWriter);
         baeldungReader.write("title", "content");
+//        baeldungReader.write("title", "content");
         verify(mockArticleWriter);
     }
 
